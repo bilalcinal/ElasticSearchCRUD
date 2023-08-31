@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using ElasticSearch.Model;
 using Nest;
 
@@ -12,12 +11,20 @@ namespace ElasticSearch.Service
         public static void AddElasticsearch(
             this IServiceCollection services, IConfiguration configuration)
         {
-            var url = configuration["ELKConfiguration:url"];
-            var defaultIndex = configuration["ELKConfiguration:index"];
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
 
-            var settings = new ConnectionSettings(new Uri(url))
+            var elkConfiguration = configuration.GetSection("ELKConfiguration").Get<ELKConfiguration>();
+            if (elkConfiguration == null)
+            {
+                throw new ArgumentException("ELKConfiguration section is missing or invalid.");
+            }
+
+            var settings = new ConnectionSettings(new Uri(elkConfiguration.Uri))
                 .PrettyJson()
-                .DefaultIndex(defaultIndex);
+                .DefaultIndex(elkConfiguration.Index);
 
             AddDefaultMappings(settings);
 
@@ -25,7 +32,7 @@ namespace ElasticSearch.Service
 
             services.AddSingleton<IElasticClient>(client);
 
-            CreateIndex(client, defaultIndex);
+            CreateIndex(client, elkConfiguration.Index);
         }
 
         private static void AddDefaultMappings(ConnectionSettings settings)

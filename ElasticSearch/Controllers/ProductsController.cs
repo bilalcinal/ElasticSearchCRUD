@@ -19,7 +19,6 @@ namespace ElasticSearch.Controllers
             _elasticClient = elasticClient;
         }
 
-        // GET api/products/{id}
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -32,7 +31,6 @@ namespace ElasticSearch.Controllers
             return Ok(response.Source);
         }
 
-        // POST api/products
         [HttpPost]
         public IActionResult Post(Product product)
         {
@@ -47,7 +45,6 @@ namespace ElasticSearch.Controllers
             }
         }
 
-        // PUT api/products/{id}
         [HttpPut("{id}")]
         public IActionResult Put(int id, Product product)
         {
@@ -62,7 +59,6 @@ namespace ElasticSearch.Controllers
             }
         }
 
-        // DELETE api/products/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
