@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ElasticSearch.API/ElasticSearch.API.csproj",
+                "${workspaceFolder}/ElasticSearch.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/ElasticSearch.API/ElasticSearch.API.csproj",
+                "${workspaceFolder}/ElasticSearch.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/ElasticSearch.API/ElasticSearch.API.csproj"
+                "${workspaceFolder}/ElasticSearch.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
