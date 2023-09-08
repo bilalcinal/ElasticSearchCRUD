@@ -7,7 +7,7 @@ namespace ElasticSearch.Model
 {
     public class ELKConfiguration
     {
-         public string Uri { get; set; }
+        public string Uri { get; set; }
         public string Index { get; set; }
     }
 }

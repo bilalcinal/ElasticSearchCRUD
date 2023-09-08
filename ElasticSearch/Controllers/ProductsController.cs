@@ -9,7 +9,7 @@ using Nest;
 namespace ElasticSearch.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ProductsController : ControllerBase
     {
         private readonly IElasticClient _elasticClient;
@@ -19,7 +19,7 @@ namespace ElasticSearch.Controllers
             _elasticClient = elasticClient;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public IActionResult Get(int id)
         {
             var response = _elasticClient.Get<Product>(id, idx => idx.Index("products"));
@@ -45,7 +45,7 @@ namespace ElasticSearch.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Put(int id, Product product)
         {
             var response = _elasticClient.Update<Product>(id, idx => idx.Doc(product).Index("products"));
@@ -59,7 +59,7 @@ namespace ElasticSearch.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             var response = _elasticClient.Delete<Product>(id, idx => idx.Index("products"));

@@ -8,8 +8,7 @@ namespace ElasticSearch.Service
 {
     public static class ElasticSearchExtensions
     {
-        public static void AddElasticsearch(
-            this IServiceCollection services, IConfiguration configuration)
+        public static void AddElasticsearch(this IServiceCollection services, IConfiguration configuration)
         {
             if (configuration == null)
             {
@@ -37,10 +36,7 @@ namespace ElasticSearch.Service
 
         private static void AddDefaultMappings(ConnectionSettings settings)
         {
-            settings
-                .DefaultMappingFor<Product>(m => m
-                    .Ignore(p => p.Price)
-                );
+            settings.DefaultMappingFor<Product>(m => m.Ignore(p => p.Price));
         }
 
         private static void CreateIndex(IElasticClient client, string indexName)
